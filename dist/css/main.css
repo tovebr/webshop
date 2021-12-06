@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+#landing {
+  height: 100vh;
+  width: 100vw;
+  background: url(../assets/background.jpg) center center/cover no-repeat;
+  color: #161616;
+}
+
+#landing .welcome-text {
+  text-align: center;
+  padding-top: 10%;
+}
+
+#landing .welcome-text h1 {
+  font-size: 5rem;
+  font-family: "Fuzzy Bubbles", cursive;
+}
+
+#landing .welcome-text p {
+  font-size: 2rem;
+}
+/*# sourceMappingURL=main.css.map */
