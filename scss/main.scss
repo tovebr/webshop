@@ -17,9 +17,10 @@
   width: 100vw;
   background: url(../assets/background.jpg) center center/cover no-repeat;
   color: rgb(22, 22, 22);
+  overflow: hidden;
   .welcome-text {
     text-align: center;
-    padding-top: 10%;
+    padding-top: 7%;
 
     h1 {
       font-size: 5rem;
@@ -49,6 +50,26 @@
     }
     .fade {
       animation: fade 5s;
+    }
+  }
+  a {
+    text-decoration: none;
+    background-color: rgb(7, 58, 7);
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    display: block;
+    width: 10rem;
+    margin: 3rem auto;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-align: center;
+    box-shadow: #333 2px 2px 4px;
+
+    &:active {
+      transform: translate(2px, 2px);
+      box-shadow: #333 0px 0px 0px;
     }
   }
 }
