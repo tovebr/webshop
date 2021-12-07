@@ -17,11 +17,12 @@
   width: 100vw;
   background: url(../assets/background.jpg) center center/cover no-repeat;
   color: #161616;
+  overflow: hidden;
 }
 
 #landing .welcome-text {
   text-align: center;
-  padding-top: 10%;
+  padding-top: 7%;
 }
 
 #landing .welcome-text h1 {
@@ -59,6 +60,30 @@
 #landing .carousel .fade {
   -webkit-animation: fade 5s;
           animation: fade 5s;
+}
+
+#landing a {
+  text-decoration: none;
+  background-color: #073a07;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  display: block;
+  width: 10rem;
+  margin: 3rem auto;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-align: center;
+  -webkit-box-shadow: #333 2px 2px 4px;
+          box-shadow: #333 2px 2px 4px;
+}
+
+#landing a:active {
+  -webkit-transform: translate(2px, 2px);
+          transform: translate(2px, 2px);
+  -webkit-box-shadow: #333 0px 0px 0px;
+          box-shadow: #333 0px 0px 0px;
 }
 
 @-webkit-keyframes fade {
