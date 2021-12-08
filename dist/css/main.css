@@ -7,6 +7,25 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+body {
+  background: url(../assets/background.jpg) center center/cover no-repeat;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+li {
+  list-style: none;
+}
+
+input,
+select,
+button {
+  border: none;
+}
+
 .page-container {
   max-width: 1200px;
   margin: auto;
@@ -15,7 +34,6 @@
 #landing {
   height: 100vh;
   width: 100vw;
-  background: url(../assets/background.jpg) center center/cover no-repeat;
   color: #161616;
   overflow: hidden;
 }
@@ -63,9 +81,7 @@
 }
 
 #landing a {
-  text-decoration: none;
   background-color: #073a07;
-  color: #fff;
   padding: 1rem 2rem;
   border-radius: 10px;
   display: block;
@@ -84,6 +100,110 @@
           transform: translate(2px, 2px);
   -webkit-box-shadow: #333 0px 0px 0px;
           box-shadow: #333 0px 0px 0px;
+}
+
+nav {
+  background-color: rgba(51, 51, 51, 0.699);
+}
+
+nav .nav-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 2rem;
+}
+
+nav .nav-bar h3 {
+  font-size: 2rem;
+  padding: 0.5rem;
+}
+
+nav .nav-bar ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+nav .nav-bar ul li {
+  padding: 1rem;
+}
+
+nav .nav-bar ul li .active {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+#articles {
+  min-height: 100vh;
+  width: 100vw;
+}
+
+#articles .welcome {
+  text-align: center;
+  margin: 2rem;
+}
+
+#articles .welcome h4 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+#articles .welcome p {
+  margin-bottom: 1rem;
+}
+
+#articles .welcome .filter-options {
+  margin: 3rem auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 35rem;
+  position: relative;
+}
+
+#articles .welcome .filter-options select {
+  height: 2rem;
+  border-radius: 5px;
+  padding: 0.2rem;
+  margin: 0.5rem;
+  width: 30%;
+}
+
+#articles .welcome .filter-options input {
+  height: 2rem;
+  border-radius: 5px 0 0 5px;
+  padding: 0.2rem;
+  margin: 0.5rem;
+  margin-right: 0;
+}
+
+#articles .welcome .filter-options button {
+  position: absolute;
+  top: 8px;
+  right: -29px;
+  background-color: rgba(36, 35, 35, 0.267);
+  height: 2rem;
+  border-radius: 0 5px 5px 0;
+  padding: 0.2rem;
+  /* margin: 0.5rem;
+        margin-left: 0; */
+}
+
+#articles .welcome .filter-options button svg {
+  /* margin-top: 1rem; */
+  color: #fff;
+  fill: #fff;
+  height: 22px;
+  width: 22px;
 }
 
 @-webkit-keyframes fade {
