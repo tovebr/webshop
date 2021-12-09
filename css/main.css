@@ -8,7 +8,11 @@
 }
 
 body {
-  background: url(../assets/background.jpg) center center/cover no-repeat;
+  /* background: url(../assets/background.jpg) center center/cover no-repeat; */
+  background-image: url(../assets/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 a {
@@ -76,8 +80,8 @@ button {
 }
 
 #landing .carousel .fade {
-  -webkit-animation: fade 5s;
-          animation: fade 5s;
+  -webkit-animation: fade 3s;
+          animation: fade 3s;
 }
 
 #landing a {
@@ -104,6 +108,11 @@ button {
 
 nav {
   background-color: rgba(51, 51, 51, 0.699);
+  position: fixed;
+  top: 0;
+  -webkit-transition: top 0.2s;
+  transition: top 0.2s;
+  width: 100%;
 }
 
 nav .nav-bar {
@@ -147,6 +156,7 @@ nav .nav-bar ul li .active {
 #articles .welcome {
   text-align: center;
   margin: 2rem;
+  padding-top: 5rem;
 }
 
 #articles .welcome h4 {
@@ -178,6 +188,10 @@ nav .nav-bar ul li .active {
   width: 30%;
 }
 
+#articles .welcome .filter-options select option:first-child {
+  color: #969393;
+}
+
 #articles .welcome .filter-options input {
   height: 2rem;
   border-radius: 5px 0 0 5px;
@@ -194,16 +208,94 @@ nav .nav-bar ul li .active {
   height: 2rem;
   border-radius: 0 5px 5px 0;
   padding: 0.2rem;
-  /* margin: 0.5rem;
-        margin-left: 0; */
 }
 
 #articles .welcome .filter-options button svg {
-  /* margin-top: 1rem; */
   color: #fff;
   fill: #fff;
   height: 22px;
   width: 22px;
+}
+
+#articles .articles-display {
+  margin-top: 5rem;
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 2rem;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  padding-bottom: 5rem;
+}
+
+#articles .articles-display .card {
+  width: 20rem;
+  height: 30rem;
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: auto;
+}
+
+#articles .articles-display .card .img-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 18rem;
+}
+
+#articles .articles-display .card .img-container img {
+  max-width: 90%;
+  max-height: 100%;
+  padding: 10% 5%;
+}
+
+#articles .articles-display .card .info {
+  background-color: #eeeeee;
+  padding: 5% 13% 7% 13%;
+  height: 12rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#articles .articles-display .card .info .btn-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#articles .articles-display .card .info .btn-group .btn {
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  width: 6.5rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+}
+
+#articles .articles-display .card .info .btn-group .btn-buy {
+  background-color: #295329;
+}
+
+#articles .articles-display .card .info .btn-group .btn-more {
+  background-color: #8b8c8d;
 }
 
 @-webkit-keyframes fade {
@@ -212,12 +304,12 @@ nav .nav-bar ul li .active {
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
   }
-  10% {
+  20% {
     opacity: 1;
     -webkit-transform: translateX(0);
             transform: translateX(0);
   }
-  90% {
+  80% {
     opacity: 1;
     -webkit-transform: translateX(0);
             transform: translateX(0);
@@ -235,12 +327,12 @@ nav .nav-bar ul li .active {
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
   }
-  10% {
+  20% {
     opacity: 1;
     -webkit-transform: translateX(0);
             transform: translateX(0);
   }
-  90% {
+  80% {
     opacity: 1;
     -webkit-transform: translateX(0);
             transform: translateX(0);

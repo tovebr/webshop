@@ -11,10 +11,10 @@ const articles = [
   new Article("sunset", 1500, "standing", "assets/anna-sunset.jpg", "Anna"),
   new Article("wading", 2500, "standing", "assets/anna-vattenbryn.jpg", "Anna"),
   new Article(
-    "by water",
+    "by the shore",
     2500,
     "laying",
-    "assets/anna-vid-brny-sitter.jpg",
+    "assets/anna-vid-bryn-sitter.jpg",
     "Anna"
   ),
   new Article("bassbaby", 3000, "standing", "assets/basbaby.jpg", "Kontra"),
@@ -26,7 +26,7 @@ const articles = [
     "Kontra"
   ),
   new Article("glamour", 3000, "standing", "assets/glamourbass.jpg", "Kontra"),
-  new Article("outdoors", 2500, "laying", "assets/kattmontage-2.jpg"),
+  new Article("outdoors", 2500, "laying", "assets/kattmotage-2.jpg"),
   new Article(
     "the animal",
     3500,
