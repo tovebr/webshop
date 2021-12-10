@@ -28,6 +28,7 @@ input,
 select,
 button {
   border: none;
+  cursor: pointer;
 }
 
 .page-container {
@@ -176,7 +177,7 @@ nav .nav-bar ul li .active {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  max-width: 35rem;
+  max-width: 45rem;
   position: relative;
 }
 
@@ -185,7 +186,7 @@ nav .nav-bar ul li .active {
   border-radius: 5px;
   padding: 0.2rem;
   margin: 0.5rem;
-  width: 30%;
+  width: 22%;
 }
 
 #articles .welcome .filter-options select option:first-child {
@@ -197,24 +198,33 @@ nav .nav-bar ul li .active {
   border-radius: 5px 0 0 5px;
   padding: 0.2rem;
   margin: 0.5rem;
-  margin-right: 0;
+  /* margin-right: 0; */
 }
 
-#articles .welcome .filter-options button {
+#articles .welcome .filter-options #btn-search {
   position: absolute;
   top: 8px;
-  right: -29px;
+  right: 100px;
   background-color: rgba(36, 35, 35, 0.267);
   height: 2rem;
   border-radius: 0 5px 5px 0;
   padding: 0.2rem;
 }
 
-#articles .welcome .filter-options button svg {
+#articles .welcome .filter-options #btn-search svg {
   color: #fff;
   fill: #fff;
   height: 22px;
   width: 22px;
+}
+
+#articles .welcome .filter-options .clear {
+  height: 2rem;
+  border-radius: 5px;
+  padding: 0.2rem;
+  margin: 0.5rem;
+  width: 4rem;
+  background-color: #d2d5d6;
 }
 
 #articles .articles-display {
