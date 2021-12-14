@@ -20,7 +20,7 @@
         <div class="page-container nav-bar">
           <h3><a href="index.html">TB</a></h3>
           <ul class="nav-list">
-            <li><a href="articles.html" class="active">Shop</a></li>
+            <li><a href="shop.html" class="active">Shop</a></li>
             <li><a href="about.html">About</a></li>
             <li>
               <a href="cart.html"><i class="bi bi-bag"></i></a>
@@ -33,25 +33,19 @@
           <h4>Welcome to my webshop!</h4>
           <p>Here you'll find all my avaliable prints that are for sale</p>
           <div class="filter-options">
-            <select name="orientation" id="orientation">
+            <select name="orientation" class="search-input" id="orientation">
               <option value="none" >Select Orientation</option>
               <option value="laying">Laying</option>
               <option value="standing">Standing</Sption>
             </select>
-            <select name="series" id="series">
+            <select name="series" class="search-input" id="series">
               <option value="none">Select Series</option>
               <option value="anna">Anna</option>
               <option value="kontra">Kontra</Sption>
             </select>
-            <div class="search-div">
-
-              <input id="free-search" type="text" class="text" placeholder="search..." />
-              <button id="btn-search" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-              </svg></button>
+              <input class="search-input" id="free-search" type="text" class="text" placeholder="search..." />
             </div>
             <button class="clear">Clear</button>
-          </div>
         </div>
         <div class="articles-display">
           

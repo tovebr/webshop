@@ -15,6 +15,7 @@ window.onscroll = function () {
 const articlesContainer = document.querySelector(".articles-display");
 
 function printCards(articlesArray) {
+  articlesContainer.innerHTML = "";
   articlesArray.forEach((article, i) => {
     const cardDiv = document.createElement("div");
     cardDiv.classList = "card";
@@ -52,28 +53,46 @@ function printCards(articlesArray) {
 
 printCards(articles);
 
-const searchOrientation = document.getElementById("orientation");
-const searchSeries = document.getElementById("series");
-const searchFree = document.getElementById("free-search");
-const searchBtn = document.getElementById("btn-search");
+const searchInputs = Array.from(document.querySelectorAll(".search-input"));
 
-searchBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  const orientation = searchOrientation.value;
-  const series = searchSeries.value;
-  console.log(series);
-  const searchWord = searchFree.value;
+searchInputs.forEach((el) =>
+  el.addEventListener(`${el.tagName === "SELECT" ? "change" : "keyup"}`, search)
+);
+console.log(searchInputs);
+
+const searchClear = document.querySelector(".clear");
+
+function search() {
+  const searchOrientation = document.getElementById("orientation");
+  const searchSeries = document.getElementById("series");
+  const searchFree = document.getElementById("free-search");
 
   const searchResult = articles
     .filter((article) =>
-      orientation === "none" ? article : article.orientation === orientation
+      searchOrientation.value === "none"
+        ? article
+        : article.orientation === searchOrientation.value
     )
     .filter((article) =>
-      series === "none" ? article : article.series === series
+      searchSeries.value === "none"
+        ? article
+        : article.series === searchSeries.value
     )
     .filter((article) =>
-      searchWord === "" ? article : article.title.includes(searchWord)
+      searchFree.value === ""
+        ? article
+        : article.title.includes(searchFree.value)
     );
+  printCards(searchResult);
+}
 
-  console.log(searchResult);
+searchClear.addEventListener("click", () => {
+  console.log("clr");
+  searchInputs.forEach((el) => {
+    console.log(el.value);
+    if (el.value !== "none" || el.value !== "") {
+      console.log(el);
+      el.tagName === "SELECT" ? el.selectedIndex === -1 : el.value === "";
+    }
+  });
 });
