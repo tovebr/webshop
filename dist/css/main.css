@@ -31,9 +31,139 @@ button {
   cursor: pointer;
 }
 
+select {
+  height: 2rem;
+  border-radius: 5px;
+  padding: 0.2rem;
+  margin: 0.5rem;
+  width: 10rem;
+}
+
+button {
+  -webkit-box-shadow: 2px 2px 4px #333;
+          box-shadow: 2px 2px 4px #333;
+}
+
+button:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-transform: translate(2px, 2px);
+          transform: translate(2px, 2px);
+}
+
+.btn {
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  width: 6.5rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+}
+
+.btn-buy {
+  background-color: #295329;
+}
+
+.btn-more {
+  background-color: #8b8c8d;
+}
+
 .page-container {
   max-width: 1200px;
   margin: auto;
+  position: relative;
+}
+
+.modal {
+  position: absolute;
+  background-color: rgba(51, 51, 51, 0.664);
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.modal .more {
+  position: relative;
+  background-color: #fff;
+  width: 40rem;
+  height: 55rem;
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modal .more .bi-x {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  -webkit-transform: scale(2);
+          transform: scale(2);
+}
+
+.modal .more .img-container {
+  height: 30rem;
+  width: 30rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.modal .more .img-container img {
+  max-height: 30rem;
+  max-width: 30rem;
+  margin: auto;
+}
+
+.modal .more-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem;
+}
+
+.modal .more-info h3 {
+  margin: 1rem;
+}
+
+.modal .more-info select {
+  border: 1px #333 solid;
+  margin-bottom: 1rem;
+}
+
+.modal .more-info .price {
+  font-weight: bold;
+  margin: 0.3rem;
 }
 
 #landing {
@@ -174,14 +304,23 @@ nav .nav-bar ul li .active {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   max-width: 35rem;
   position: relative;
 }
 
-#articles .welcome .filter-options select {
+#articles .welcome select {
+  margin-bottom: 2rem;
+}
+
+#articles .welcome select option:first-child {
+  color: #939396;
+}
+
+#articles .welcome input {
   height: 2rem;
   border-radius: 5px;
   padding: 0.2rem;
@@ -189,24 +328,13 @@ nav .nav-bar ul li .active {
   width: 10rem;
 }
 
-#articles .welcome .filter-options select option:first-child {
-  color: #969393;
-}
-
-#articles .welcome .filter-options input {
+#articles .clear {
   height: 2rem;
-  border-radius: 5px;
-  padding: 0.2rem;
-  margin: 0.5rem;
-  width: 10rem;
-}
-
-#articles .welcome .clear {
-  height: 1.7rem;
   border-radius: 5px;
   padding: 0 0.2rem;
+  margin: 0.5rem;
   width: 10rem;
-  background-color: #f1f2f3;
+  background-color: #e4edf5;
 }
 
 #articles .articles-display {
@@ -271,23 +399,6 @@ nav .nav-bar ul li .active {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-}
-
-#articles .articles-display .card .info .btn-group .btn {
-  border: none;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  width: 6.5rem;
-  margin-top: 1rem;
-  border-radius: 5px;
-}
-
-#articles .articles-display .card .info .btn-group .btn-buy {
-  background-color: #295329;
-}
-
-#articles .articles-display .card .info .btn-group .btn-more {
-  background-color: #8b8c8d;
 }
 
 @-webkit-keyframes fade {
