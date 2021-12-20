@@ -58,16 +58,16 @@ const searchInputs = Array.from(document.querySelectorAll(".search-input"));
 searchInputs.forEach((el) =>
   el.addEventListener(`${el.tagName === "SELECT" ? "change" : "keyup"}`, search)
 );
-console.log(searchInputs);
 
 const searchClear = document.querySelector(".clear");
+let searchResult;
 
 function search() {
   const searchOrientation = document.getElementById("orientation");
   const searchSeries = document.getElementById("series");
   const searchFree = document.getElementById("free-search");
 
-  const searchResult = articles
+  searchResult = articles
     .filter((article) =>
       searchOrientation.value === "none"
         ? article
@@ -86,13 +86,82 @@ function search() {
   printCards(searchResult);
 }
 
+document.getElementById("sort-by").addEventListener("change", (e) => {
+  const articlesArr = searchResult ? searchResult : articles;
+
+  if (e.target.value === "price-low")
+    searchResult = articlesArr.sort((a, b) => a.price - b.price);
+  if (e.target.value === "price-high")
+    searchResult = articlesArr.sort((a, b) => b.price - a.price);
+  printCards(searchResult);
+});
+
 searchClear.addEventListener("click", () => {
-  console.log("clr");
   searchInputs.forEach((el) => {
-    console.log(el.value);
-    if (el.value !== "none" || el.value !== "") {
-      console.log(el);
-      el.tagName === "SELECT" ? el.selectedIndex === -1 : el.value === "";
+    /* if (el.value !== "none" && el.tagName === "SELECT") {
+      el.selectedIndex === Number("0");
+      console.log(el.selectedIndex);
+    }
+    if (el.value !== "" && el.id === "free-search") {
+      console.log(el.value);
+      el.value === "";
+    } */
+    if (el.tagName === "SELECT") {
+      console.log(el.value);
+      el.defaultSelected;
+    } else {
+      console.log(el.value);
+      el.value === "";
     }
   });
+  searchResult = [];
+  printCards(articles);
+});
+
+document
+  .querySelectorAll(".btn-more")
+  .forEach((el) => el.addEventListener("click", (e) => showMore(e)));
+
+function showMore(e) {
+  const id = e.target.parentNode.parentNode.parentNode.id;
+  const html = `<div class="modal">
+  <div class=" more">
+    <i class="bi bi-x"></i>
+    <div class="img-container">
+
+      <img src="${articles[id].img}" alt="">
+    </div>
+    <div class="more-info">
+      <h3>${
+        articles[id].title.slice(0, 1).toUpperCase() +
+        articles[id].title.slice(1)
+      }</h3>
+      <label for="size">Size</label>
+      <select name="size" id="size">
+        <option value="big">70x90</option>
+        <option value="medium">50x70</option>
+        <option value="small">30x20</option>
+      </select>
+      <label for="finisch">Finisch</label>
+      <select name="paper" id="paper">
+        <option value="matt">Matt</option>
+        <option value="glossy">Glossy</option>
+      </select>
+      <small>Price</small>
+      <p class="price">${articles[id].price} kr</p>
+      <button class="btn btn-buy">Add to cart</button>
+    </div>
+  </div>
+</div>`;
+
+  document.querySelector("body").insertAdjacentHTML("beforeend", html);
+}
+
+document.querySelector("body").addEventListener("click", (e) => {
+  const modal = document.querySelector(".modal");
+  if (e.target.classList.contains("bi-x") && modal) {
+    modal.parentNode.removeChild(modal);
+  } else if (e.target.classList.contains("modal") && modal) {
+    modal.parentNode.removeChild(modal);
+  }
 });
