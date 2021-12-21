@@ -23,7 +23,7 @@
             <li><a href="shop.html" class="active">Shop</a></li>
             <li><a href="about.html">About</a></li>
             <li>
-              <a href="cart.html"><i class="bi bi-bag"></i></a>
+              <a class="cart-link" href="cart.html"><i class="bi bi-bag"></i></a>
             </li>
           </ul>
         </div>
@@ -32,7 +32,7 @@
         <div class="welcome">
           <h4>Welcome to my webshop!</h4>
           <p>Here you'll find all my avaliable prints</p>
-          <div class="filter-options">
+          <form class="filter-options">
               <select name="orientation" class="search-input" id="orientation" data-default-value="none">
                 <option value="none" >Select Orientation</option>
                 <option value="laying">Laying</option>
@@ -44,45 +44,20 @@
                 <option value="kontra">Kontra</Sption>
               </select>
                 <input class="search-input" id="free-search" type="text" class="text" placeholder="search..." />
-            </div>
+            
             <select name="sort-by" class="sort-by-input" id="sort-by" data-default-value="none">
               <option value="none">Sort by...</option>
               <option value="price-high">Price: high - low</option>
               <option value="price-low">Price: low -high</option>
               
             </select>
-            <button class="clear">Clear</button>
+            <button type="reset" value="reset" class="clear">Clear</button>
+          </form>
           </div>
         <div class="articles-display">
           
         </div>
       </div>
     </div>
-    <!-- <div class="modal">
-      <div class=" more">
-        <i class="bi bi-x"></i>
-        <div class="img-container">
-
-          <img src="assets/anna-vattenbryn.jpg" alt="">
-        </div>
-        <div class="more-info">
-          <h3>Title</h3>
-          <label for="size">Size</label>
-          <select name="size" id="size">
-            <option value="big">70x90</option>
-            <option value="medium">50x70</option>
-            <option value="small">30x20</option>
-          </select>
-          <label for="finisch">Finisch</label>
-          <select name="paper" id="paper">
-            <option value="matt">Matt</option>
-            <option value="glossy">Glossy</option>
-          </select>
-          <small>Price</small>
-          <p class="price">2500 kr</p>
-          <button class="btn btn-buy">Add to cart</button>
-        </div>
-      </div>
-    </div> -->
   </body>
 </html>

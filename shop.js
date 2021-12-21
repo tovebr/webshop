@@ -1,4 +1,9 @@
 let prevScrollpos = window.pageYOffset;
+const searchClear = document.querySelector(".clear");
+
+const articlesContainer = document.querySelector(".articles-display");
+let searchResult;
+const cart = [];
 
 window.onscroll = function () {
   let currentScrollpos = window.pageYOffset;
@@ -12,26 +17,32 @@ window.onscroll = function () {
   prevScrollpos = currentScrollpos;
 };
 
-const articlesContainer = document.querySelector(".articles-display");
+function casedWords(string) {
+  let casedString = "";
+  if (string.includes(" ")) {
+    string.split(" ").forEach((word) => {
+      casedString += word.slice(0, 1).toUpperCase() + word.slice(1) + " ";
+    });
+  } else {
+    casedString = string.slice(0, 1).toUpperCase() + string.slice(1);
+  }
+  return casedString;
+}
 
 function printCards(articlesArray) {
+  if (articlesArray.length === articles.length) {
+    searchResult = [];
+    articles.sort((a, b) => a.id - b.id);
+  }
   articlesContainer.innerHTML = "";
   articlesArray.forEach((article, i) => {
     const cardDiv = document.createElement("div");
     cardDiv.classList = "card";
-    cardDiv.id = article.id = i;
-    let title;
+    if (!article.id) article.id = i;
+    cardDiv.id = article.id;
 
-    if (article.title.includes(" ")) {
-      let titleWords = article.title.split(" ");
-      let casedWords = "";
-      titleWords.forEach((word) => {
-        casedWords += word.slice(0, 1).toUpperCase() + word.slice(1) + " ";
-      });
-      title = casedWords;
-    } else {
-      title = article.title.slice(0, 1).toUpperCase() + article.title.slice(1);
-    }
+    const title = casedWords(article.title);
+    const series = casedWords(article.series);
 
     cardDiv.innerHTML = `<div class="img-container">
       <img src="${article.img}" alt="${article.title}">
@@ -39,7 +50,7 @@ function printCards(articlesArray) {
     <div class="info">
       <h3 class="title">${title}</h3>
       <p><span class="category">Price: </span>${article.price} kr</p>
-      <p><span class="category">Series: </span>${article.series}</p>
+      <p><span class="category">Series: </span>${series}</p>
       <div class="btn-group">
 
         <button class="btn btn-buy">Buy</button>
@@ -58,9 +69,6 @@ const searchInputs = Array.from(document.querySelectorAll(".search-input"));
 searchInputs.forEach((el) =>
   el.addEventListener(`${el.tagName === "SELECT" ? "change" : "keyup"}`, search)
 );
-
-const searchClear = document.querySelector(".clear");
-let searchResult;
 
 function search() {
   const searchOrientation = document.getElementById("orientation");
@@ -81,7 +89,8 @@ function search() {
     .filter((article) =>
       searchFree.value === ""
         ? article
-        : article.title.includes(searchFree.value)
+        : article.title.includes(searchFree.value) ||
+          article.series.includes(searchFree.value)
     );
   printCards(searchResult);
 }
@@ -96,33 +105,19 @@ document.getElementById("sort-by").addEventListener("change", (e) => {
   printCards(searchResult);
 });
 
-searchClear.addEventListener("click", () => {
-  searchInputs.forEach((el) => {
-    /* if (el.value !== "none" && el.tagName === "SELECT") {
-      el.selectedIndex === Number("0");
-      console.log(el.selectedIndex);
-    }
-    if (el.value !== "" && el.id === "free-search") {
-      console.log(el.value);
-      el.value === "";
-    } */
-    if (el.tagName === "SELECT") {
-      console.log(el.value);
-      el.defaultSelected;
-    } else {
-      console.log(el.value);
-      el.value === "";
-    }
-  });
-  searchResult = [];
+searchClear.addEventListener("click", (e) => {
   printCards(articles);
 });
 
 document
   .querySelectorAll(".btn-more")
   .forEach((el) => el.addEventListener("click", (e) => showMore(e)));
+document
+  .querySelectorAll(".btn-buy")
+  .forEach((el) => el.addEventListener("click", (e) => addToCart(e)));
 
 function showMore(e) {
+  const position = window.scrollY;
   const id = e.target.parentNode.parentNode.parentNode.id;
   const html = `<div class="modal">
   <div class=" more">
@@ -132,10 +127,7 @@ function showMore(e) {
       <img src="${articles[id].img}" alt="">
     </div>
     <div class="more-info">
-      <h3>${
-        articles[id].title.slice(0, 1).toUpperCase() +
-        articles[id].title.slice(1)
-      }</h3>
+      <h3>${casedWords(articles[id].title)}</h3>
       <label for="size">Size</label>
       <select name="size" id="size">
         <option value="big">70x90</option>
@@ -154,14 +146,33 @@ function showMore(e) {
   </div>
 </div>`;
 
-  document.querySelector("body").insertAdjacentHTML("beforeend", html);
+  /* articlesContainer.body.style.top = `${position}px`; */
+  document.body.style.position = "fixed";
+  document.body.insertAdjacentHTML("beforeend", html);
 }
 
 document.querySelector("body").addEventListener("click", (e) => {
   const modal = document.querySelector(".modal");
-  if (e.target.classList.contains("bi-x") && modal) {
+  if (
+    e.target.classList.contains("bi-x") ||
+    (e.target.classList.contains("modal") && modal)
+  ) {
     modal.parentNode.removeChild(modal);
-  } else if (e.target.classList.contains("modal") && modal) {
-    modal.parentNode.removeChild(modal);
+    document.body.style.position = "";
+    /*  document.body.style.top = ""; */
   }
 });
+
+function addToCart(e) {
+  const id = e.target.parentNode.parentNode.parentNode.id;
+  cart.push(articles.find((article) => Number(article.id) == id));
+  const counterHTML = document.querySelector(".cart-count");
+  if (counterHTML) {
+    counterHTML.innerHTML = cart.length;
+  } else {
+    const counter = `<p class="cart-count">${cart.length}</p>`;
+    document
+      .querySelector(".cart-link")
+      .insertAdjacentHTML("beforeend", counter);
+  }
+}
