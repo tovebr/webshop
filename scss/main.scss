@@ -52,7 +52,8 @@ button {
   width: 6.5rem;
   margin-top: 1rem;
   border-radius: 5px;
-  &-buy {
+  &-buy,
+  &-more-buy {
     background-color: rgb(41, 83, 41);
   }
   &-more {
