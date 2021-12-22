@@ -3,7 +3,7 @@ const searchClear = document.querySelector(".clear");
 
 const articlesContainer = document.querySelector(".articles-display");
 let searchResult;
-const cart = [];
+let cart = { articles: [] };
 
 window.onscroll = function () {
   let currentScrollpos = window.pageYOffset;
@@ -98,9 +98,9 @@ function search() {
 document.getElementById("sort-by").addEventListener("change", (e) => {
   const articlesArr = searchResult ? searchResult : articles;
 
-  if (e.target.value === "price-low")
+  if (e.target.value === "price-low" && articlesArr.length > 1)
     searchResult = articlesArr.sort((a, b) => a.price - b.price);
-  if (e.target.value === "price-high")
+  if (e.target.value === "price-high" && articlesArr.length > 1)
     searchResult = articlesArr.sort((a, b) => b.price - a.price);
   printCards(searchResult);
 });
@@ -134,14 +134,14 @@ function showMore(e) {
         <option value="medium">50x70</option>
         <option value="small">30x20</option>
       </select>
-      <label for="finisch">Finisch</label>
+      <label for="finish">Finish</label>
       <select name="paper" id="paper">
-        <option value="matt">Matt</option>
+        <option value="matte">Matte</option>
         <option value="glossy">Glossy</option>
       </select>
       <small>Price</small>
       <p class="price">${articles[id].price} kr</p>
-      <button class="btn btn-buy">Add to cart</button>
+      <button class="btn btn-more-buy">Add to cart</button>
     </div>
   </div>
 </div>`;
@@ -149,30 +149,51 @@ function showMore(e) {
   /* articlesContainer.body.style.top = `${position}px`; */
   document.body.style.position = "fixed";
   document.body.insertAdjacentHTML("beforeend", html);
+
+  document
+    .querySelector(".btn-more-buy")
+    .addEventListener("click", (e) => addToCart(e));
 }
 
-document.querySelector("body").addEventListener("click", (e) => {
+document.querySelector("body").addEventListener("click", (e) => closeModal(e));
+
+function closeModal(e) {
   const modal = document.querySelector(".modal");
   if (
     e.target.classList.contains("bi-x") ||
-    (e.target.classList.contains("modal") && modal)
+    e.target.classList.contains("modal") ||
+    (e.target.classList.contains("btn-more-buy") && modal)
   ) {
     modal.parentNode.removeChild(modal);
     document.body.style.position = "";
     /*  document.body.style.top = ""; */
   }
-});
+}
 
 function addToCart(e) {
   const id = e.target.parentNode.parentNode.parentNode.id;
-  cart.push(articles.find((article) => Number(article.id) == id));
+  cart.articles.push(articles.find((article) => Number(article.id) == id));
+  localStorage.setItem("cart", JSON.stringify(cart));
+  displayCartCount();
+}
+
+function displayCartCount() {
   const counterHTML = document.querySelector(".cart-count");
   if (counterHTML) {
-    counterHTML.innerHTML = cart.length;
+    counterHTML.innerHTML = cart.articles.length;
   } else {
-    const counter = `<p class="cart-count">${cart.length}</p>`;
+    const counter = `<p class="cart-count">${cart.articles.length}</p>`;
     document
       .querySelector(".cart-link")
       .insertAdjacentHTML("beforeend", counter);
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const ref = localStorage.getItem("cart");
+
+  if (ref) {
+    cart = JSON.parse(ref);
+    displayCartCount();
+  }
+});

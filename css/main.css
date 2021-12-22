@@ -60,7 +60,7 @@ button:active {
   border-radius: 5px;
 }
 
-.btn-buy {
+.btn-buy, .btn-more-buy {
   background-color: #295329;
 }
 
