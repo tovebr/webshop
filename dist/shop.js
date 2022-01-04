@@ -111,16 +111,79 @@ searchClear.addEventListener("click", (e) => {
 
 document
   .querySelectorAll(".btn-more")
-  .forEach((el) => el.addEventListener("click", (e) => showMore(e)));
+  .forEach((el) => el.addEventListener("click", (e) => createModal(e)));
 document
   .querySelectorAll(".btn-buy")
   .forEach((el) => el.addEventListener("click", (e) => addToCart(e)));
 
-function showMore(e) {
+function createModal(e) {
+  console.log(e.target);
   const position = window.scrollY;
-  const id = e.target.parentNode.parentNode.parentNode.id;
-  const html = `<div class="modal">
-  <div class=" more">
+
+  let modalWindow = document.createElement("div");
+  modalWindow.classList.add("modal");
+
+  modalWindow.innerHTML = modalFilling(e);
+
+  /* articlesContainer.body.style.top = `${position}px`; */
+  document.body.style.position = "fixed";
+  document.body.appendChild(modalWindow);
+
+  e.target.parentNode.parentNode.parentNode.classList.contains("card") &&
+    document
+      .querySelector(".btn-more-buy")
+      .addEventListener("click", (e) => addToCart(e));
+}
+
+function cartList() {
+  let html = "";
+
+  cart.articles.sort((a, b) => {
+    if (a.title > b.title) {
+      return 1;
+    } else if (a.title < b.title) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+
+  cart.articles.length > 0 &&
+    cart.articles.forEach((article) => {
+      html += `<li id="${article.id}"><div class="img-container"><img src="${
+        article.img
+      }"></div><h3 class="article-title">${casedWords(article.title)}</h3><div>
+      <label for="size">Size</label><select name="size" id="size">
+      <option value="big">70x90</option>
+      <option value="medium">50x70</option>
+      <option value="small">30x20</option>
+    </select></div>
+    <div>
+    <label for="finish">Finish</label>
+    <select name="paper" id="paper">
+      <option value="matte">Matte</option>
+      <option value="glossy">Glossy</option>
+    </select></div><p class="article-price">${
+      article.price
+    } kr</p><i class="bi bi-trash"></i></li>`;
+    });
+  return html;
+}
+
+function calcTotal() {
+  let sum = 0;
+  if (cart.articles.length > 0)
+    cart.articles.forEach((article) => (sum += article.price));
+  return sum;
+}
+
+function modalFilling(e) {
+  let html = "";
+
+  if (e.target.parentNode.parentNode.parentNode.classList.contains("card")) {
+    const id = e.target.parentNode.parentNode.parentNode.id;
+
+    html = `<div class="more">
     <i class="bi bi-x"></i>
     <div class="img-container">
 
@@ -143,21 +206,29 @@ function showMore(e) {
       <p class="price">${articles[id].price} kr</p>
       <button class="btn btn-more-buy">Add to cart</button>
     </div>
-  </div>
-</div>`;
+  </div>`;
+  } else if (e.target.classList.contains("bi-bag")) {
+    html = `<div class="cart">
+    <div class="cart-holder">
+      <ul class="cart-list">
+      ${cartList()}
+      </ul>
+      </div>
+      <div class="summary">
+        <h3>Total</h3><p>${calcTotal()} kr</p>
+      </div>
+      <button class="toCheckout" >Proceed to Checkout</button>
+  </div>`;
+  }
 
-  /* articlesContainer.body.style.top = `${position}px`; */
-  document.body.style.position = "fixed";
-  document.body.insertAdjacentHTML("beforeend", html);
-
-  document
-    .querySelector(".btn-more-buy")
-    .addEventListener("click", (e) => addToCart(e));
+  return html;
 }
 
-document.querySelector("body").addEventListener("click", (e) => closeModal(e));
+document
+  .querySelector(".bi-bag")
+  .addEventListener("click", (e) => createModal(e));
 
-function closeModal(e) {
+document.querySelector("body").addEventListener("click", (e) => {
   const modal = document.querySelector(".modal");
   if (
     e.target.classList.contains("bi-x") ||
@@ -167,8 +238,10 @@ function closeModal(e) {
     modal.parentNode.removeChild(modal);
     document.body.style.position = "";
     /*  document.body.style.top = ""; */
+  } else if (e.target.classList.contains("bi-trash")) {
+    console.log(e.target.parentNode.id);
   }
-}
+});
 
 function addToCart(e) {
   const id = e.target.parentNode.parentNode.parentNode.id;

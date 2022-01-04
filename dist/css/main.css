@@ -96,6 +96,114 @@ button:active {
           justify-content: center;
 }
 
+.modal .cart {
+  background-color: #fff;
+  width: 55rem;
+  height: 50rem;
+  padding: 3.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.modal .cart-holder {
+  max-height: 25rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.modal .cart-holder li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem 0;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modal .cart-holder li p {
+  font-size: 1.1rem;
+}
+
+.modal .cart-holder li .img-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 3.3rem;
+  width: 3.3rem;
+}
+
+.modal .cart-holder li .img-container img {
+  max-height: 3rem;
+  max-width: 3rem;
+}
+
+.modal .cart-holder li .article-title {
+  width: 13rem;
+  padding: 0 1rem;
+}
+
+.modal .cart-holder li .article-price {
+  padding: 0.4rem;
+  width: 5rem;
+  text-align: right;
+}
+
+.modal .cart-holder li label {
+  padding-left: 0.3rem;
+}
+
+.modal .cart-holder li select {
+  width: 5rem;
+  border: 1px solid #333;
+}
+
+.modal .cart-holder li i {
+  padding: 0.3rem;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.modal .cart .summary {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 20rem;
+  margin-right: 0rem;
+  margin-left: auto;
+  -ms-flex-item-align: right;
+      align-self: right;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.modal .cart .toCheckout {
+  background-color: #295329;
+  color: #fff;
+  padding: 0.7rem;
+  width: 8rem;
+  margin-right: 0px;
+  margin-left: auto;
+}
+
 .modal .more {
   position: relative;
   background-color: #fff;

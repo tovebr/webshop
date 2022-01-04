@@ -81,6 +81,79 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  .cart {
+    background-color: #fff;
+    width: 55rem;
+    height: 50rem;
+    padding: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &-holder {
+      max-height: 25rem;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      li {
+        display: flex;
+        padding: 1rem 0;
+        justify-content: space-between;
+        align-items: center;
+
+        p {
+          font-size: 1.1rem;
+        }
+        .img-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 3.3rem;
+          width: 3.3rem;
+          img {
+            max-height: 3rem;
+            max-width: 3rem;
+          }
+        }
+        .article-title {
+          width: 13rem;
+          padding: 0 1rem;
+        }
+
+        .article-price {
+          padding: 0.4rem;
+          width: 5rem;
+          text-align: right;
+        }
+
+        label {
+          padding-left: 0.3rem;
+        }
+        select {
+          width: 5rem;
+          border: 1px solid #333;
+        }
+        i {
+          padding: 0.3rem;
+          transform: scale(1.2);
+        }
+      }
+    }
+    .summary {
+      display: flex;
+      width: 20rem;
+      margin-right: 0rem;
+      margin-left: auto;
+      align-self: right;
+      justify-content: space-between;
+    }
+    .toCheckout {
+      background-color: rgb(41, 83, 41);
+      color: #fff;
+      padding: 0.7rem;
+      width: 8rem;
+      margin-right: 0px;
+      margin-left: auto;
+    }
+  }
   .more {
     position: relative;
     background-color: #fff;
