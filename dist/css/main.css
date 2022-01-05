@@ -96,10 +96,19 @@ button:active {
           justify-content: center;
 }
 
+.modal .bi-x {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  -webkit-transform: scale(2);
+          transform: scale(2);
+}
+
 .modal .cart {
+  position: relative;
   background-color: #fff;
   width: 55rem;
-  height: 50rem;
+  min-height: 40rem;
   padding: 3.5rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -114,7 +123,7 @@ button:active {
 }
 
 .modal .cart-holder {
-  max-height: 25rem;
+  height: 20rem;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -220,14 +229,6 @@ button:active {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-.modal .more .bi-x {
-  position: absolute;
-  top: 0.8rem;
-  right: 0.8rem;
-  -webkit-transform: scale(2);
-          transform: scale(2);
 }
 
 .modal .more .img-container {
