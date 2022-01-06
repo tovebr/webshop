@@ -294,6 +294,7 @@ function deleteFromCart(el) {
     Number(cart.articles.findIndex((art) => art.cartId == el.parentNode.id)),
     1
   );
+
   el.parentNode.parentNode.removeChild(el.parentNode);
   document.querySelector(".price-total").innerText = calcTotal();
   if (cart.articles.length === 0) {
@@ -381,16 +382,26 @@ function addToCart(id) {
   const finish = document.getElementById("paper");
   const size = document.getElementById("size");
 
-  let boughtArticle = articles.find((article) => Number(article.id) == id);
+  const boughtArticle = JSON.parse(
+    JSON.stringify(articles.find((article) => Number(article.id) == id))
+  );
 
   size ? (boughtArticle.size = size.value) : (boughtArticle.size = "big");
   finish
     ? (boughtArticle.finish = finish.value)
     : (boughtArticle.finish = "matte");
 
-  cart.articles.length = 0
-    ? (boughtArticle.cartId = Number(id) + 100)
-    : cart.articles.max();
+  if (cart.articles.length === 0) {
+    boughtArticle.cartId = 100;
+  } else if (cart.articles.length === 1) {
+    boughtArticle.cartId = cart.articles[0].cartId + 1;
+  } else if (cart.articles.length > 1) {
+    boughtArticle.cartId =
+      cart.articles.reduce(
+        (curr, prev) => (curr > prev.cartId ? curr : prev.cartId),
+        0
+      ) + 1;
+  }
 
   cart.articles.push(boughtArticle);
 
