@@ -138,9 +138,11 @@ function cartList() {
     cart.articles.forEach((article) => {
       html += `<li id="${
         article.cartId
-      }"><div class="img-container"><img src="${
+      }"><div class="header"><div class="img-container"><img src="${
         article.img
-      }"></div><h3 class="article-title">${casedWords(article.title)}</h3><div>
+      }"></div><h3 class="article-title">${casedWords(
+        article.title
+      )}</h3></div><div class="print-select"><div>
       <label for="size">Size</label><select name="size" id="size" class="print-option">
       <option value="big">70x90</option>
       <option value="medium" ${
@@ -157,7 +159,7 @@ function cartList() {
       <option value="glossy" ${
         article.finish === "glossy" ? "selected" : ""
       }>Glossy</option>
-    </select></div><p class="article-price">${
+    </select></div></div><p class="article-price">${
       article.price
     } kr</p><i class="bi bi-trash"></i></li>`;
     });
@@ -296,7 +298,7 @@ function deleteFromCart(el) {
   );
 
   el.parentNode.parentNode.removeChild(el.parentNode);
-  document.querySelector(".price-total").innerText = calcTotal();
+  document.querySelector(".price-total").innerText = `${calcTotal()} kr`;
   if (cart.articles.length === 0) {
     document.querySelector(".cart-holder").innerHTML = emptyCartMessage();
   }

@@ -103,10 +103,15 @@ button {
       overflow-y: scroll;
       overflow-x: hidden;
       li {
+        position: relative;
         display: flex;
         padding: 1rem 0;
         justify-content: space-between;
         align-items: center;
+        .header {
+          display: flex;
+          align-items: center;
+        }
 
         p {
           font-size: 1.1rem;
@@ -132,14 +137,19 @@ button {
           width: 5rem;
           text-align: right;
         }
+        .print-select {
+          display: flex;
+          flex-direction: row;
 
-        label {
-          padding-left: 0.3rem;
+          label {
+            padding-left: 0.3rem;
+          }
+          select {
+            width: 5rem;
+            border: 1px solid #333;
+          }
         }
-        select {
-          width: 5rem;
-          border: 1px solid #333;
-        }
+
         i {
           padding: 0.3rem;
           transform: scale(1.2);
@@ -267,6 +277,7 @@ button {
 nav {
   background-color: rgba(51, 51, 51, 0.699);
   position: fixed;
+  z-index: 2;
   top: 0;
   transition: top 0.2s;
   width: 100%;
@@ -309,7 +320,7 @@ nav {
 
 #articles {
   min-height: 100vh;
-  width: 100vw;
+  max-width: 98vw;
   position: relative;
   .welcome {
     text-align: center;
@@ -392,6 +403,83 @@ nav {
           display: flex;
           justify-content: space-between;
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  #landing {
+    .welcome-text {
+      padding-top: 8rem;
+      h1 {
+        font-size: 2.5rem;
+      }
+      p {
+        font-size: 1.5rem;
+      }
+    }
+    .carousel {
+      &-item {
+        height: 250px;
+        max-width: 550px;
+      }
+    }
+  }
+  #articles {
+    .welcome {
+      padding-top: 3rem;
+    }
+    .filter-options {
+      margin: 2rem auto 1rem auto;
+      select,
+      input {
+        margin: 0.3rem;
+      }
+    }
+    .articles-display {
+      grid-template-columns: 1fr;
+      margin: auto;
+      .card {
+        height: 28rem;
+        .info {
+          height: 10rem;
+        }
+      }
+    }
+  }
+  .modal {
+    .cart {
+      height: 70%;
+      width: 90%;
+      padding: 2rem;
+      &-holder {
+        li {
+          flex-direction: column;
+          border-bottom: #333 1px dotted;
+          .header {
+            margin-bottom: 0.5rem;
+          }
+          /* .print-select {
+            display: flex;
+            flex-direction: row;
+          } */
+          label {
+            width: 5rem;
+          }
+          .article-price {
+            width: 85%;
+          }
+        }
+        i {
+          position: absolute;
+          top: 1.5rem;
+          right: 1.5rem;
+        }
+      }
+      .summary {
+        width: 96%;
+        margin: 0;
       }
     }
   }
