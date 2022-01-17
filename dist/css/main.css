@@ -31,7 +31,8 @@ button {
   cursor: pointer;
 }
 
-select {
+select,
+.number {
   height: 2rem;
   border-radius: 5px;
   padding: 0.2rem;
@@ -83,14 +84,12 @@ button:active {
   background-color: rgba(51, 51, 51, 0.664);
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  padding-top: 5rem;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -102,13 +101,14 @@ button:active {
   right: 0.8rem;
   -webkit-transform: scale(2);
           transform: scale(2);
+  cursor: pointer;
 }
 
 .modal .cart {
   position: relative;
   background-color: #fff;
   width: 55rem;
-  min-height: 40rem;
+  height: 50rem;
   padding: 3.5rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -175,7 +175,7 @@ button:active {
 }
 
 .modal .cart-holder li .article-title {
-  width: 13rem;
+  width: 10rem;
   padding: 0 1rem;
 }
 
@@ -183,6 +183,21 @@ button:active {
   padding: 0.4rem;
   width: 5rem;
   text-align: right;
+}
+
+.modal .cart-holder li select,
+.modal .cart-holder li .number {
+  width: 5rem;
+  border: 1px solid #333;
+}
+
+.modal .cart-holder li .number {
+  width: 2.5rem;
+}
+
+.modal .cart-holder li .number::-webkit-inner-spin-button,
+.modal .cart-holder li .number::-webkit-outer-spin-button {
+  opacity: 1;
 }
 
 .modal .cart-holder li .print-select {
@@ -199,15 +214,11 @@ button:active {
   padding-left: 0.3rem;
 }
 
-.modal .cart-holder li .print-select select {
-  width: 5rem;
-  border: 1px solid #333;
-}
-
 .modal .cart-holder li i {
   padding: 0.3rem;
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
+  cursor: pointer;
 }
 
 .modal .cart .summary {
@@ -237,7 +248,7 @@ button:active {
   position: relative;
   background-color: #fff;
   width: 40rem;
-  height: 55rem;
+  height: 50rem;
   padding: 2rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -252,8 +263,8 @@ button:active {
 }
 
 .modal .more .img-container {
-  height: 30rem;
-  width: 30rem;
+  height: 25rem;
+  width: 25rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -266,8 +277,8 @@ button:active {
 }
 
 .modal .more .img-container img {
-  max-height: 30rem;
-  max-width: 30rem;
+  max-height: 25rem;
+  max-width: 25rem;
   margin: auto;
 }
 
@@ -437,8 +448,7 @@ nav .nav-bar ul .cart-link .cart-count {
 
 #articles .welcome {
   text-align: center;
-  margin: 2rem;
-  padding-top: 5rem;
+  padding-top: 7rem;
 }
 
 #articles .welcome h4 {
@@ -598,10 +608,6 @@ nav .nav-bar ul .cart-link .cart-count {
         -ms-flex-direction: column;
             flex-direction: column;
     border-bottom: #333 1px dotted;
-    /* .print-select {
-            display: flex;
-            flex-direction: row;
-          } */
   }
   .modal .cart-holder li .header {
     margin-bottom: 0.5rem;

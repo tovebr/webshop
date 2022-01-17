@@ -2,7 +2,7 @@ let prevScrollpos = window.pageYOffset;
 const searchClear = document.querySelector(".clear");
 
 const articlesContainer = document.querySelector(".articles-display");
-let searchResult;
+let searchResult = [];
 
 let cart = { articles: [] };
 
@@ -61,6 +61,16 @@ function printCards(articlesArray) {
 
     articlesContainer.insertAdjacentElement("beforeend", cardDiv);
   });
+  document
+    .querySelectorAll(".btn-more")
+    .forEach((el) => el.addEventListener("click", (e) => createModal(e)));
+  document
+    .querySelectorAll(".btn-buy")
+    .forEach((el) =>
+      el.addEventListener("click", (e) =>
+        addToCart(e.target.parentNode.parentNode.parentNode.id)
+      )
+    );
 }
 
 printCards(articles);
@@ -97,29 +107,25 @@ function search() {
 }
 
 document.getElementById("sort-by").addEventListener("change", (e) => {
-  const articlesArr = searchResult ? searchResult : articles;
+  const articlesArr = searchResult.length > 0 ? searchResult : articles;
+
+  console.log(e.target.value);
 
   if (e.target.value === "price-low" && articlesArr.length > 1)
-    searchResult = articlesArr.sort((a, b) => a.price - b.price);
+    articlesArr.sort((a, b) => {
+      a.price - b.price;
+      console.log(a.price);
+    });
   if (e.target.value === "price-high" && articlesArr.length > 1)
-    searchResult = articlesArr.sort((a, b) => b.price - a.price);
+    articlesArr.sort((a, b) => b.price - a.price);
+  console.log(articlesArr);
+  searchResult = articlesArr;
   printCards(searchResult);
 });
 
 searchClear.addEventListener("click", (e) => {
   printCards(articles);
 });
-
-document
-  .querySelectorAll(".btn-more")
-  .forEach((el) => el.addEventListener("click", (e) => createModal(e)));
-document
-  .querySelectorAll(".btn-buy")
-  .forEach((el) =>
-    el.addEventListener("click", (e) =>
-      addToCart(e.target.parentNode.parentNode.parentNode.id)
-    )
-  );
 
 function cartList() {
   cart.articles.sort((a, b) => {
@@ -142,7 +148,9 @@ function cartList() {
         article.img
       }"></div><h3 class="article-title">${casedWords(
         article.title
-      )}</h3></div><div class="print-select"><div>
+      )}</h3></div><div><div><input type="number" min="1" class="number print-option" value="${
+        article.quantity || 1
+      }"></div></div><div class="print-select"><div>
       <label for="size">Size</label><select name="size" id="size" class="print-option">
       <option value="big">70x90</option>
       <option value="medium" ${
@@ -182,15 +190,14 @@ function calcTotal() {
 
 function createModal(e) {
   const position = window.scrollY;
+  const fullPage = document.getElementById("articles");
 
   let modalWindow = document.createElement("div");
   modalWindow.classList.add("modal");
 
-  modalWindow.innerHTML = modalFilling(e);
+  modalWindow.innerHTML = modalFilling(e, position);
 
-  /* articlesContainer.body.style.top = `${position}px`; */
-  document.body.style.position = "fixed";
-  document.body.appendChild(modalWindow);
+  fullPage.appendChild(modalWindow);
 
   let stored = "";
 
@@ -203,29 +210,27 @@ function createModal(e) {
       );
   }
 
-  /* stored === "" && stored === "cart.articles"; */
   Array.from(document.querySelectorAll(".print-option")).forEach((select) =>
     select.addEventListener("change", () => {
       calcPrice({
         id:
           stored === "articles"
             ? e.target.parentNode.parentNode.parentNode.id
-            : select.parentNode.parentNode.id,
+            : select.parentNode.parentNode.parentNode.id,
 
         choosen: select.value,
-        /* arrayStored: stored, */
       });
     })
   );
 }
 
-function modalFilling(e) {
+function modalFilling(e, position) {
   let html = "";
 
   if (e.target.parentNode.parentNode.parentNode.classList.contains("card")) {
     const id = e.target.parentNode.parentNode.parentNode.id;
 
-    html = `<div class="more">
+    html = `<div class="more" style="top: ${position}px;">
     <i class="bi bi-x"></i>
     <div class="img-container">
 
@@ -256,7 +261,7 @@ function modalFilling(e) {
     </div>
   </div>`;
   } else if (e.target.classList.contains("bi-bag")) {
-    html = `<div class="cart"><i class="bi bi-x"></i>
+    html = `<div class="cart" style="top: ${position}px;><i class="bi bi-x"></i>
     <div class="cart-holder">
       <ul class="cart-list">
       ${cartList()}
@@ -284,49 +289,41 @@ document.querySelector("body").addEventListener("click", (e) => {
     (e.target.classList.contains("btn-more-buy") && modal)
   ) {
     modal.parentNode.removeChild(modal);
-    document.body.style.position = "";
-    /*  document.body.style.top = ""; */
   } else if (e.target.classList.contains("bi-trash")) {
-    deleteFromCart(e.target);
+    deleteFromCart(e.target.parentNode.id);
   }
 });
 
-function deleteFromCart(el) {
+function deleteFromCart(id) {
   cart.articles.splice(
-    Number(cart.articles.findIndex((art) => art.cartId == el.parentNode.id)),
+    Number(cart.articles.findIndex((art) => art.cartId == id)),
     1
   );
 
-  el.parentNode.parentNode.removeChild(el.parentNode);
+  document
+    .getElementById(id)
+    .parentNode.removeChild(document.getElementById(id));
+
   document.querySelector(".price-total").innerText = `${calcTotal()} kr`;
   if (cart.articles.length === 0) {
     document.querySelector(".cart-holder").innerHTML = emptyCartMessage();
   }
+  localStorage.setItem("cart", JSON.stringify(cart));
   displayCartCount();
 }
 
 function calcPrice(arg) {
   const { id, choosen } = arg;
+  console.log(arg);
 
   let article;
 
   if (Number(id) >= 100) {
     article = cart.articles.find((article) => Number(article.cartId) == id);
+    console.log(article.cartId);
   } else {
     article = articles.find((article) => Number(article.id) == id);
   }
-
-  const printConfig = {
-    finish: {
-      matte: 0,
-      glossy: 300,
-    },
-    size: {
-      big: 0,
-      medium: -250,
-      small: -500,
-    },
-  };
 
   const sizePriceChange = 250;
   const finishPriceChange = 300;
@@ -340,6 +337,15 @@ function calcPrice(arg) {
       article.price -= finishPriceChange;
     }
     article.finish = choosen;
+  } else if (Number(choosen)) {
+    let newQuantity = Number(choosen);
+
+    if (newQuantity > article.quantity)
+      article.price = (article.price / article.quantity) * newQuantity;
+    if (newQuantity < article.quantity)
+      article.price = (article.price / article.quantity) * newQuantity;
+
+    article.quantity = newQuantity;
   } else {
     if (article.size === "big" && choosen === "small") {
       console.log(choosen);
@@ -363,21 +369,19 @@ function calcPrice(arg) {
     }
     article.size = choosen;
   }
-  console.log(article.price);
+
   displayNewPrice(article);
 }
 
 function displayNewPrice(article) {
-  console.log(article.cartId);
   if (article.cartId) {
     document
       .getElementById(article.cartId)
       .querySelector(".article-price").innerText = `${article.price} kr`;
+    document.querySelector(".price-total").innerText = `${calcTotal()} kr`;
   } else {
     document.querySelector(".price").innerText = `${article.price} kr`;
   }
-
-  document.querySelector(".price-total").innerText = `${calcTotal()} kr`;
 }
 
 function addToCart(id) {
@@ -387,6 +391,8 @@ function addToCart(id) {
   const boughtArticle = JSON.parse(
     JSON.stringify(articles.find((article) => Number(article.id) == id))
   );
+
+  boughtArticle.quantity = 1;
 
   size ? (boughtArticle.size = size.value) : (boughtArticle.size = "big");
   finish
@@ -404,7 +410,6 @@ function addToCart(id) {
         0
       ) + 1;
   }
-
   cart.articles.push(boughtArticle);
 
   localStorage.setItem("cart", JSON.stringify(cart));
@@ -423,7 +428,7 @@ function displayCartCount() {
         .insertAdjacentHTML("beforeend", counter);
     }
   } else {
-    counterHTML.parentNode.removeChild(counterHTML);
+    counterHTML && counterHTML.parentNode.removeChild(counterHTML);
   }
 }
 
