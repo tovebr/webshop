@@ -377,7 +377,7 @@ function modalFilling(e, position) {
       <div class="summary">
         <h3>Total</h3><p class="price-total">${calcTotal()} kr</p>
       </div>
-      <button class="toCheckout" >Proceed to Checkout</button>
+      <a href="checkout.html" class="toCheckout" >Proceed to Checkout</a>
   </div>`;
   }
 
