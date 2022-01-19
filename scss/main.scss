@@ -179,6 +179,7 @@ button {
       color: #fff;
       padding: 0.7rem;
       width: 8rem;
+      text-align: center;
       margin-right: 0px;
       margin-left: auto;
     }
@@ -332,7 +333,7 @@ nav {
 
 #articles {
   min-height: 100vh;
-  max-width: 98vw;
+  max-width: 100vw;
   position: relative;
   .welcome {
     text-align: center;
@@ -419,7 +420,48 @@ nav {
     }
   }
 }
-
+#checkout {
+  background-color: rgb(27, 27, 27);
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  .checkout-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2 {
+      color: #fff;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    a {
+      background-color: rgb(41, 83, 41);
+      padding: 1rem;
+      width: 70%;
+      text-align: center;
+    }
+  }
+}
+@media (max-width: 1150px) and (min-width: 551px) {
+  #landing {
+    .carousel {
+      &-item {
+        height: 400px;
+        max-width: 700px;
+      }
+    }
+  }
+  #articles {
+    width: 100vw;
+    .articles-display {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
 @media (max-width: 550px) {
   #landing {
     .welcome-text {
@@ -439,6 +481,7 @@ nav {
     }
   }
   #articles {
+    width: 100%;
     .welcome {
       padding-top: 5rem;
     }
