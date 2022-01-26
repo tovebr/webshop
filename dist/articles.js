@@ -20,7 +20,7 @@ const articles = [
     "by the shore",
     2500,
     "laying",
-    "assets/anna-vid-bryn-sitter.jpg",
+    "assets/Anna-vid-bryn-sitter.jpg",
     "anna"
   ),
   new Article("bassbaby", 3000, "standing", "assets/basbaby.jpg", "kontra"),
