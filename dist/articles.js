@@ -4,16 +4,12 @@ function Article(
   orientation,
   img,
   series = "freestanding"
-  /* size = "big",
-  finish = "matte" */
 ) {
   (this.title = title),
     (this.price = price),
     (this.orientation = orientation),
     (this.img = img),
     (this.series = series);
-  /* (this.size = size),
-    (this.finish = finish) */
 }
 
 const articles = [
