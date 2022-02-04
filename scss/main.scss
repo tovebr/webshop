@@ -13,6 +13,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  background-position: center;
 }
 a {
   text-decoration: none;
@@ -226,7 +227,7 @@ button {
   }
 }
 #landing {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
 
   color: rgb(22, 22, 22);
@@ -398,10 +399,13 @@ nav {
         align-items: center;
         justify-content: center;
         height: 18rem;
+        width: 19rem;
+        margin: auto;
         img {
-          max-width: 90%;
+          max-width: 100%;
           max-height: 100%;
           padding: 10% 5%;
+          margin: auto;
         }
       }
       .info {
@@ -465,7 +469,7 @@ nav {
 @media (max-width: 550px) {
   #landing {
     .welcome-text {
-      padding-top: 8rem;
+      padding-top: 4rem;
       h1 {
         font-size: 2.5rem;
       }
@@ -506,22 +510,23 @@ nav {
   .modal {
     .more {
       width: 90%;
-      height: 75vh;
+      height: 85vh;
       .img-container {
-        height: 20rem;
-        width: 20rem;
+        height: 10rem;
+        width: 15rem;
       }
       select {
         padding: 0;
       }
     }
     .cart {
-      height: 70vh;
+      height: 80vh;
       width: 85%;
       padding: 1rem;
 
       &-holder {
-        height: 25rem;
+        min-height: 15rem;
+        margin-top: 1.5rem;
         li {
           flex-direction: column;
           border-bottom: #333 1px dotted;
@@ -533,6 +538,20 @@ nav {
             position: absolute;
             top: 1.1rem;
             right: 0.5rem;
+            margin-right: 0;
+          }
+          .print-select {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+          }
+          .select-finish,
+          .select-size {
+            display: flex;
+            flex-direction: column;
+            label {
+              padding-left: 0.7rem;
+            }
           }
           select {
             padding: 0;
@@ -543,6 +562,7 @@ nav {
           .article-price {
             width: 85%;
             margin-right: 5rem;
+            margin-top: 1rem;
           }
         }
         i {
@@ -560,6 +580,9 @@ nav {
       }
     }
   }
+}
+
+@media (max-width: 550px) {
 }
 
 @keyframes fade {
