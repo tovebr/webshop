@@ -236,7 +236,7 @@ function cartList() {
         article.title
       )}</h3></div><div><div><input type="number" min="1" class="number print-option" value="${
         article.quantity || 1
-      }"></div></div><div class="print-select"><div>
+      }"></div></div><div class="print-select"><div class="select-size">
       <label for="size">Size</label><select name="size" id="size" class="print-option">
       <option value="big">70x90</option>
       <option value="medium" ${
@@ -246,7 +246,7 @@ function cartList() {
         article.size === "small" ? "selected" : ""
       }>30x20</option>
     </select></div>
-    <div>
+    <div class="select-finish">
     <label for="finish">Finish</label>
     <select name="paper" id="paper" class="print-option">
       <option value="matte" >Matte</option>
